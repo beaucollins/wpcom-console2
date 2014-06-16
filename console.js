@@ -873,6 +873,9 @@ ParamBuilder.prototype.setupInput = function(field, func) {
 
   field
     .attr("contenteditable",true)
+    .attr('autocomplete', 'none')
+    .attr('autocorrect', 'none')
+    .attr('autocapitalize', 'none')
     .attr("tabindex","1")
     .on('focus', this.focusListener)
     .on('blur', this.blurListener)
@@ -1214,6 +1217,9 @@ function buildNode(part) {
     node.text(field.getParam(part.name));
     node
       .attr('contenteditable', true)
+      .attr('autocomplete', 'none')
+      .attr('autocorrect', 'none')
+      .attr('autocapitalize', 'none')
       .attr("tabindex", 1)
       .attr("data-label", part.getLabel())
       .on('paste', function(e){
