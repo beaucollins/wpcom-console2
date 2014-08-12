@@ -656,6 +656,10 @@ div.compact {
   white-space: nowrap; }
 
 code.compact {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: nowrap;
   color: #808080; }
 code span.key {
   color: #881390; }
@@ -833,6 +837,13 @@ code span.number {
     -webkit-flex-grow: 1;
     flex-shrink: 1;
     -webkit-flex-shrink: 1; }
+  #detail .viewer {
+    padding-top: 38px; }
+    #detail .viewer pre {
+      padding: 0;
+      margin: 0;
+      line-height: 18px;
+      color: #265773; }
 
 .overlay {
   position: fixed;
@@ -918,6 +929,87 @@ code span.number {
   #reference :focus li.selected {
     background: #5cabd6;
     color: #FFF; }
+
+.view-segment {
+  margin: 0 auto;
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: flex-start;
+  -webkit-align-items: flex-start;
+  font-size: 12px;
+  height: 0;
+  position: relative;
+  top: 6px;
+  z-index: 5; }
+  .view-segment li {
+    background: white;
+    padding: 4px 8px;
+    margin: 0;
+    border: 1px solid #2485bc;
+    border-width: 1px 1px 1px 0;
+    color: #2485bc; }
+    .view-segment li:first-child {
+      border-radius: 1px 0 0 1px;
+      border-left-width: 1px; }
+    .view-segment li:last-child {
+      border-radius: 0 1px 1px 0; }
+    .view-segment li.selected {
+      background: #2485bc;
+      color: #FFF; }
+
+.json-browse {
+  line-height: 18px; }
+  .json-browse ol {
+    padding: 0;
+    list-style: none;
+    display: block;
+    margin: 0; }
+    .json-browse ol ol {
+      margin: 0 0 0 16px; }
+  .json-browse li {
+    white-space: nowrap;
+    margin: 0; }
+    .json-browse li > span::before {
+      content: '';
+      margin-left: 2px;
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      position: relative;
+      vertical-align: 0px;
+      color: #808080;
+      font-size: 10px;
+      -moz-transition: -moz-transform 200ms;
+      -webkit-transition: -webkit-transform 200ms;
+      transition: transform 200ms;
+      -webkit-transform-origin: 4px 7px;
+      -moz-transform-origin: 4px 7px;
+      transform-origin: 4px 7px; }
+    .json-browse li > span:hover::before {
+      color: #4d4d4d; }
+    .json-browse li.closed > span::before, .json-browse li.open > span::before {
+      content: '\25B6'; }
+    .json-browse li.open > span::before {
+      -moz-transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg); }
+    .json-browse li.closed {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .json-browse li > span {
+      cursor: pointer;
+      color: #808080; }
+    .json-browse li > span:first-child code {
+      color: #881390; }
 
 @-webkit-keyframes throbber {
   0% {
