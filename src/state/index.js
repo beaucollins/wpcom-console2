@@ -1,3 +1,3 @@
-export const reducer = ( state = false ) => {
-	return state;
-}
+import reducer from './reducer'
+
+export { reducer }

@@ -4,7 +4,7 @@ const Html = require( 'html-webpack-plugin' );
 
 module.exports = {
 	devtool: 'source-map',
-	entry: './src/',
+	entry: [ 'whatwg-fetch', './src/'],
 	output: { path: join( __dirname, 'dist' ), filename: 'bundle.js' },
 	module: {
 		loaders: [
