@@ -84,9 +84,13 @@ describe( 'reducer', () => {
 	} )
 
 	it( 'should have default state', () => {
-		deepEqual(
-			createStore( reducer ).getState(),
-			{ endpoints: { versions: {}, selected_endpoint: null, selected_version: null }, log: [], request: { path: '' } }
-		)
+		deepEqual( createStore( reducer ).getState(), {
+			endpoints: {versions: {}, selected_endpoint: null, selected_version: null },
+			log: [],
+			request: {
+				path: '',
+				params: { path: {}, query: {}, body: {} }
+			}
+		} )
 	} )
 } )

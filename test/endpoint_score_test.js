@@ -1,9 +1,8 @@
-import { readFileSync } from 'fs'
-import { join } from 'path'
 import { deepEqual, equal, fail } from 'assert'
 import { groupEndpoints, sortScoredEndpoints } from 'ui/endpoint-list/util'
 import { map } from 'ramda'
 import LiquidMetal from 'liquidmetal'
+import fixture from './endpoint-fixture'
 
 describe( 'Endpoint scores', () => {
 	let endpoints
@@ -16,7 +15,7 @@ describe( 'Endpoint scores', () => {
 	}
 
 	beforeEach( () => {
-		endpoints = JSON.parse( readFileSync( join( __dirname, './endpoint-fixture.json' ) ) )
+		endpoints = fixture.slice()
 	} )
 
 	it( 'should score text', () => {

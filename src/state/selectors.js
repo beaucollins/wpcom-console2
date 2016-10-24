@@ -18,3 +18,5 @@ export const getSelectedVersionEndpoint = state => find(
 
 export const getLog = path( [ 'log' ] )
 export const getPath = path( [ 'request', 'path' ] )
+
+export const getRequest = path( [ 'request' ] )

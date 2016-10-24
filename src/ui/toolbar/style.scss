@@ -78,12 +78,9 @@
 	flex: 1 auto;
 	display: flex;
 	align-items: center;
-	background: hsla( 200, 50%, 60%, 1 );
+	background: hsla( 200, 50%, 99%, 1 );
+	color: hsla( 200, 50%, 20%, 1 );
 	padding: 8px;
-
-	&:focus {
-		background: hsla( 200, 50%, 65%, 1 );
-	}
 
 }
 

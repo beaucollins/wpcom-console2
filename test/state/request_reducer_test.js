@@ -1,6 +1,6 @@
 import { createStore } from 'redux'
 import { deepEqual, equal } from 'assert'
-import { setPath } from 'state/actions'
+import { setPath, setRequestParam } from 'state/actions'
 import reducer from 'state/reducer/request'
 
 describe( 'request reducer', () => {
@@ -17,11 +17,20 @@ describe( 'request reducer', () => {
 	} )
 
 	it( 'should have deafult state', () => {
-		deepEqual( store.getState(), { path: '' } )
+		deepEqual( store.getState(), { path: '', params: {
+			path: {},
+			query: {},
+			body: {}
+		} } )
 	} )
 
 	it( 'sets path', shouldUpdate(
 		state => equal( state.path, 'lol' ),
 		setPath( 'lol' )
+	) )
+
+	it( 'sets param', shouldUpdate(
+		state => equal( state.params.query.foo, 'bar' ),
+		setRequestParam( 'query', 'foo', 'bar' )
 	) )
 } )

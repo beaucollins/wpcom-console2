@@ -1,0 +1,271 @@
+{ 
+  "endpoints": {
+    "versions": {
+      "test": {
+        "endpoints": [
+          {
+            "id": "test",
+            "description": "Follow a specific Reader List.",
+            "method": "POST",
+            "path_format": "/read/lists/%s/%s/follow",
+            "path_labeled": "/read/lists/$username/$list/follow",
+            "group": "read",
+            "request": {
+              "path": {
+                "$username": {
+                  "type": "(string)",
+                  "description": "The username of the owner of the list."
+                },
+                "$list": {
+                  "type": "(string)",
+                  "description": "The specific list to retrieve."
+                }
+              },
+              "query": {
+                "context": {
+                  "type": "(string)",
+                  "description": {
+                    "display": "(default) Formats the output as HTML for display.  Shortcodes are parsed, paragraph tags are added, etc..",
+                    "edit": "Formats the output for editing.  Shortcodes are left unparsed, significant whitespace is kept, etc.."
+                  }
+                },
+                "http_envelope": {
+                  "type": "(bool)",
+                  "description": {
+                    "false": "(default) ",
+                    "true": "Some environments (like in-browser JavaScript or Flash) block or divert responses with a non-200 HTTP status code.  Setting this parameter will force the HTTP status code to always be 200.  The JSON response is wrapped in an \"envelope\" containing the \"real\" HTTP status code and headers."
+                  }
+                },
+                "pretty": {
+                  "type": "(bool)",
+                  "description": {
+                    "false": "(default) ",
+                    "true": "Output pretty JSON"
+                  }
+                },
+                "meta": {
+                  "type": "(string)",
+                  "description": "Optional. Loads data from the endpoints found in the 'meta' part of the response. Comma-separated list. Example: meta=site,likes"
+                },
+                "fields": {
+                  "type": "(string)",
+                  "description": "Optional. Returns specified fields only. Comma-separated list. Example: fields=ID,title"
+                },
+                "callback": {
+                  "type": "(string)",
+                  "description": "An optional JSONP callback function."
+                }
+              },
+              "body": [
+
+              ]
+            },
+            "response": {
+              "body": {
+                "ID": {
+                  "type": "(int)",
+                  "description": "The post ID."
+                },
+                "site_ID": {
+                  "type": "(int)",
+                  "description": "The site ID."
+                },
+                "author": {
+                  "type": "(object)",
+                  "description": "The author of the post."
+                },
+                "date": {
+                  "type": "(iso 8601 datetime)",
+                  "description": "The post's creation time."
+                },
+                "modified": {
+                  "type": "(iso 8601 datetime)",
+                  "description": "The post's most recent update time."
+                },
+                "title": {
+                  "type": "(html)",
+                  "description": "<code>context</code> dependent."
+                },
+                "URL": {
+                  "type": "(url)",
+                  "description": "The full permalink URL to the post."
+                },
+                "short_URL": {
+                  "type": "(url)",
+                  "description": "The wp.me short URL."
+                },
+                "content": {
+                  "type": "(html)",
+                  "description": "<code>context</code> dependent."
+                },
+                "excerpt": {
+                  "type": "(html)",
+                  "description": "<code>context</code> dependent."
+                },
+                "slug": {
+                  "type": "(string)",
+                  "description": "The name (slug) for the post, used in URLs."
+                },
+                "guid": {
+                  "type": "(string)",
+                  "description": "The GUID for the post."
+                },
+                "status": {
+                  "type": "(string)",
+                  "description": {
+                    "publish": "The post is published.",
+                    "draft": "The post is saved as a draft.",
+                    "pending": "The post is pending editorial approval.",
+                    "private": "The post is published privately",
+                    "future": "The post is scheduled for future publishing.",
+                    "trash": "The post is in the trash.",
+                    "auto-draft": "The post is a placeholder for a new post."
+                  }
+                },
+                "sticky": {
+                  "type": "(bool)",
+                  "description": "Is the post sticky?"
+                },
+                "password": {
+                  "type": "(string)",
+                  "description": "The plaintext password protecting the post, or, more likely, the empty string if the post is not password protected."
+                },
+                "parent": {
+                  "type": "(object|false)",
+                  "description": "A reference to the post's parent, if it has one."
+                },
+                "type": {
+                  "type": "(string)",
+                  "description": "The post's post_type. Post types besides post, page and revision need to be whitelisted using the <code>rest_api_allowed_post_types</code> filter."
+                },
+                "discussion": {
+                  "type": "(object)",
+                  "description": "Hash of discussion options for the post"
+                },
+                "likes_enabled": {
+                  "type": "(bool)",
+                  "description": "Is the post open to likes?"
+                },
+                "sharing_enabled": {
+                  "type": "(bool)",
+                  "description": "Should sharing buttons show on this post?"
+                },
+                "like_count": {
+                  "type": "(int)",
+                  "description": "The number of likes for this post."
+                },
+                "i_like": {
+                  "type": "(bool)",
+                  "description": "Does the current user like this post?"
+                },
+                "is_reblogged": {
+                  "type": "(bool)",
+                  "description": "Did the current user reblog this post?"
+                },
+                "is_following": {
+                  "type": "(bool)",
+                  "description": "Is the current user following this blog?"
+                },
+                "global_ID": {
+                  "type": "(string)",
+                  "description": "A unique WordPress.com-wide representation of a post."
+                },
+                "featured_image": {
+                  "type": "(url)",
+                  "description": "The URL to the featured image for this post if it has one."
+                },
+                "post_thumbnail": {
+                  "type": "(object)",
+                  "description": "The attachment object for the featured image if it has one."
+                },
+                "format": {
+                  "type": "(string)",
+                  "description": {
+                    "standard": "Standard",
+                    "aside": "Aside",
+                    "chat": "Chat",
+                    "gallery": "Gallery",
+                    "link": "Link",
+                    "image": "Image",
+                    "quote": "Quote",
+                    "status": "Status",
+                    "video": "Video",
+                    "audio": "Audio"
+                  }
+                },
+                "geo": {
+                  "type": "(object|false)",
+                  "description": ""
+                },
+                "menu_order": {
+                  "type": "(int)",
+                  "description": "(Pages Only) The order pages should appear in."
+                },
+                "page_template": {
+                  "type": "(string)",
+                  "description": "(Pages Only) The page template this page is using."
+                },
+                "publicize_URLs": {
+                  "type": "(array)",
+                  "description": "Array of Twitter and Facebook URLs published by this post."
+                },
+                "terms": {
+                  "type": "(object)",
+                  "description": "Hash of taxonomy names mapping to a hash of terms keyed by term name."
+                },
+                "tags": {
+                  "type": "(object)",
+                  "description": "Hash of tags (keyed by tag name) applied to the post."
+                },
+                "categories": {
+                  "type": "(object)",
+                  "description": "Hash of categories (keyed by category name) applied to the post."
+                },
+                "attachments": {
+                  "type": "(object)",
+                  "description": "Hash of post attachments (keyed by attachment ID). Returns the most recent 20 attachments. Use the `/sites/$site/media` endpoint to query the attachments beyond the default of 20 that are returned here."
+                },
+                "attachment_count": {
+                  "type": "(int)",
+                  "description": "The total number of attachments for this post. Use the `/sites/$site/media` endpoint to query the attachments beyond the default of 20 that are returned here."
+                },
+                "metadata": {
+                  "type": "(array)",
+                  "description": "Array of post metadata keys and values. All unprotected meta keys are available by default for read requests. Both unprotected and protected meta keys are available for authenticated requests with access. Protected meta keys can be made available with the <code>rest_api_allowed_public_metadata</code> filter."
+                },
+                "meta": {
+                  "type": "(object)",
+                  "description": "API result meta data"
+                },
+                "capabilities": {
+                  "type": "(object)",
+                  "description": "List of post-specific permissions for the user; publish_post, edit_post, delete_post"
+                },
+                "revisions": {
+                  "type": "(array)",
+                  "description": "List of post revision IDs. Only available for posts retrieved with context=edit."
+                },
+                "other_URLs": {
+                  "type": "(object)",
+                  "description": "List of URLs for this post. Permalink and slug suggestions."
+                },
+                "following": {
+                  "type": "(bool)",
+                  "description": "Whether the user is following the List."
+                },
+                "list": {
+                  "type": "(array)",
+                  "description": "List details"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "selected_endpoint": "test",
+    "selected_version": "test"
+  },
+  "log": [],
+  "request": { "path": "", "params": { "query":{}, "path":{}, "body": {}} }
+}

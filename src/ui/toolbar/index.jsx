@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Connected as EndpointList } from 'ui/endpoint-list'
+import { Connected as PathEditor } from 'ui/path-editor'
 import { getVersionNames, getSelectedVersionName, getSelectedVersionEndpoint, getPath } from 'state/selectors'
 import { selectEndpoints, runEndpoint, setPath } from 'state/actions'
-import { applySpec } from 'ramda'
+import { applySpec, ifElse, isNil } from 'ramda'
 import DropDown from './dropdown'
 import './style'
 
@@ -12,6 +14,9 @@ export default class Toolbar extends Component {
 
 	constructor( props ) {
 		super( props )
+		this.state = {
+			showEndpoints: false
+		}
 	}
 
 	selectEndpoints = version => {
@@ -32,27 +37,54 @@ export default class Toolbar extends Component {
 		document.execCommand( 'insertText', false, e.clipboardData.getData( 'text/plain' ) )
 	}
 
+	_onBeginSearching = () => {
+		clearTimeout( this._barTimer )
+		this.setState( { showEndpoints: true } )
+	}
+
+	_onLeaveSearchBar = () => {
+		this._barTimer = setTimeout( () => this.setState( { showEndpoints: false } ), 100 )
+	}
+
+	renderBar = () => ifElse(
+		() => this.props.endpoint,
+		() => 'endpoint editor',
+		() => 'other'
+	)()
+
 	render() {
-		const { versions, selectedVersion, path } = this.props
+		const { versions, selectedVersion, path, endpoint } = this.props
+		const { showEndpoints } = this.state
 		return (
-			<div className="toolbar">
-				<div className="version-selector">
-					<div className="version-dropdown">
-						<DropDown options={ versions } label={ selectedVersion } onSelect={ this.selectEndpoints } />
+			<div className="header">
+				<div className="toolbar">
+					<div className="version-selector">
+						<div className="version-dropdown">
+							<DropDown options={ versions } label={ selectedVersion } onSelect={ this.selectEndpoints } />
+						</div>
 					</div>
-				</div>
-				<div className="bar">
-					<div className="search-bar" tabIndex="0">
-						<div className="search-field"
-							contentEditable="true"
-							onPaste={ this._onPaste }
-							onInput={ this._onInput }
-							onChange={ debug }
-							suppressContentEditableWarning={ true }
-							>{ path }</div>
+					<div className="bar">
+						{ ifElse(
+							() => isNil( endpoint ),
+							() => (
+								<div className="search-bar">
+									<div className="search-field"
+										contentEditable="true"
+										onPaste={ this._onPaste }
+										onInput={ this._onInput }
+										onChange={ debug }
+										onFocus={ this._onBeginSearching }
+										onBlur={ this._onLeaveSearchBar }
+										suppressContentEditableWarning={ true }
+										>{ path }</div>
+								</div>
+							),
+							() => <PathEditor />
+						)() }
 					</div>
+					<div tabIndex="0" className="send-button" onClick={ this._run } >Send</div>
 				</div>
-				<div tabIndex="0" className="send-button" onClick={ this._run } >Send</div>
+				{ showEndpoints && <EndpointList /> }
 			</div>
 		);
 	}

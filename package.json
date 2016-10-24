@@ -32,6 +32,7 @@
     "eslint": "^3.8.1",
     "html-webpack-plugin": "^2.22.0",
     "jsdom": "^9.8.0",
+    "json-loader": "^0.5.4",
     "liquidmetal": "github:rmm5t/liquidmetal",
     "mocha": "^3.1.2",
     "node-sass": "^3.10.1",
